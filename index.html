@@ -168,7 +168,9 @@ section.block { padding: clamp(72px, 9vw, 128px) var(--gut) 0 }
 .ig-grid a { position: relative; display: block; overflow: hidden; border-radius: 6px }
 .ig-grid img { width: 100%; aspect-ratio: 1; object-fit: cover; transition: scale .3s ease }
 .ig-grid a::after { content: ""; position: absolute; top: 8px; right: 8px; width: 18px; height: 18px; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23fff' stroke-width='2'%3E%3Crect x='3' y='3' width='18' height='18' rx='5'/%3E%3Ccircle cx='12' cy='12' r='4'/%3E%3C/svg%3E") center / contain no-repeat; filter: drop-shadow(0 1px 3px #0009) }
-.follow { margin-top: clamp(24px, 3vw, 36px) }
+.feed + .feed { margin-top: clamp(36px, 5vw, 56px) }
+.feed-head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: .5rem 1rem; margin-bottom: 14px }
+.feed-head h3 { font: var(--italic) 600 clamp(1.6rem, 1.2rem + 1.2vw, 2.2rem)/1 var(--display) }
 
 /* Contact fills the screen so "Get in touch" lands squarely on it */
 #contact { display: flex; flex-direction: column; min-height: 100svh }
@@ -457,16 +459,29 @@ section.block { padding: clamp(72px, 9vw, 128px) var(--gut) 0 }
 </section>
 
 <section class="block" id="insta" data-only="modelling">
-  <div class="head" data-in><h2>On Instagram</h2><p>Recent shoots from Sahil's feed. Tap one to open the post.</p></div>
-  <div class="ig-grid">
-    <a href="https://www.instagram.com/p/DW_71wsjAXI/" target="_blank" rel="noopener" data-in><img src="photos/ig/white.jpg" alt="Sahil in a white shirt, hands in his hair" loading="lazy" style="object-position:50% 30%"></a>
-    <a href="https://www.instagram.com/p/DWMVz8IDHkw/" target="_blank" rel="noopener" data-in style="--i:1"><img src="photos/ig/blue.jpg" alt="Sahil in a blue shirt, standing" loading="lazy" style="object-position:50% 20%"></a>
-    <a href="https://www.instagram.com/p/DOJBckDjKVS/" target="_blank" rel="noopener" data-in style="--i:2"><img src="photos/ig/flowers.jpg" alt="Sahil from behind, beside red flowers" loading="lazy"></a>
-    <a href="https://www.instagram.com/p/DOOESknDBqa/" target="_blank" rel="noopener" data-in style="--i:3"><img src="photos/ig/lake.jpg" alt="Sahil by a lake, looking away" loading="lazy"></a>
-    <a href="https://www.instagram.com/p/DNtO7hFWJmf/" target="_blank" rel="noopener" data-in style="--i:4"><img src="photos/look-6.jpg" alt="Sahil in a racing jacket beside a red car" loading="lazy" style="object-position:50% 25%"></a>
-    <a href="https://www.instagram.com/p/DZMO3RFjNne/" target="_blank" rel="noopener" data-in style="--i:5"><img src="photos/look-1.jpg" alt="Sahil in a pool at night" loading="lazy" style="object-position:50% 30%"></a>
+  <div class="head" data-in><h2>On Instagram</h2><p>Recent shoots from our feeds. Tap one to open the post.</p></div>
+  <div class="feed">
+    <div class="feed-head" data-in><h3>Sahil</h3><a class="link" href="https://www.instagram.com/sahilpathak.21/" target="_blank" rel="noopener"><svg class="icon"><use href="#i-ig"/></svg>Follow @sahilpathak.21</a></div>
+    <div class="ig-grid">
+      <a href="https://www.instagram.com/p/DW_71wsjAXI/" target="_blank" rel="noopener" data-in><img src="photos/ig/white.jpg" alt="Sahil in a white shirt, hands in his hair" loading="lazy" style="object-position:50% 30%"></a>
+      <a href="https://www.instagram.com/p/DWMVz8IDHkw/" target="_blank" rel="noopener" data-in style="--i:1"><img src="photos/ig/blue.jpg" alt="Sahil in a blue shirt, standing" loading="lazy" style="object-position:50% 20%"></a>
+      <a href="https://www.instagram.com/p/DOJBckDjKVS/" target="_blank" rel="noopener" data-in style="--i:2"><img src="photos/ig/flowers.jpg" alt="Sahil from behind, beside red flowers" loading="lazy"></a>
+      <a href="https://www.instagram.com/p/DOOESknDBqa/" target="_blank" rel="noopener" data-in style="--i:3"><img src="photos/ig/lake.jpg" alt="Sahil by a lake, looking away" loading="lazy"></a>
+      <a href="https://www.instagram.com/p/DNtO7hFWJmf/" target="_blank" rel="noopener" data-in style="--i:4"><img src="photos/look-6.jpg" alt="Sahil in a racing jacket beside a red car" loading="lazy" style="object-position:50% 25%"></a>
+      <a href="https://www.instagram.com/p/DZMO3RFjNne/" target="_blank" rel="noopener" data-in style="--i:5"><img src="photos/look-1.jpg" alt="Sahil in a pool at night" loading="lazy" style="object-position:50% 30%"></a>
+    </div>
   </div>
-  <a class="link follow" href="https://www.instagram.com/sahilpathak.21/" target="_blank" rel="noopener" data-in><svg class="icon"><use href="#i-ig"/></svg>Follow @sahilpathak.21</a>
+  <div class="feed">
+    <div class="feed-head" data-in><h3>Shivam</h3><a class="link" href="https://www.instagram.com/shivam.forsure/" target="_blank" rel="noopener"><svg class="icon"><use href="#i-ig"/></svg>Follow @shivam.forsure</a></div>
+    <div class="ig-grid">
+      <a href="https://www.instagram.com/p/Db7_xYrCaQ-/" target="_blank" rel="noopener" data-in><img src="photos/ig/sv-suit.jpg" alt="Shivam in a black suit, seated" loading="lazy" style="object-position:50% 30%"></a>
+      <a href="https://www.instagram.com/p/DKmXsQQNerO/" target="_blank" rel="noopener" data-in style="--i:1"><img src="photos/ig/sv-hands.jpg" alt="Shivam in a white shirt, hands raised" loading="lazy" style="object-position:50% 25%"></a>
+      <a href="https://www.instagram.com/p/DWBgvUciOZd/" target="_blank" rel="noopener" data-in style="--i:2"><img src="photos/ig/sv-bouquet.jpg" alt="Shivam in a white shirt holding a bouquet" loading="lazy" style="object-position:50% 20%"></a>
+      <a href="https://www.instagram.com/p/DaFtDPykcmR/" target="_blank" rel="noopener" data-in style="--i:3"><img src="photos/ig/sv-sunset.jpg" alt="Shivam against a sunset sky" loading="lazy" style="object-position:50% 25%"></a>
+      <a href="https://www.instagram.com/p/DZO1rg4EWyh/" target="_blank" rel="noopener" data-in style="--i:4"><img src="photos/ig/sv-tee.jpg" alt="Shivam in a black tee, looking down" loading="lazy" style="object-position:50% 20%"></a>
+      <a href="https://www.instagram.com/p/DX8qDZTiD3u/" target="_blank" rel="noopener" data-in style="--i:5"><img src="photos/ig/sv-gym.jpg" alt="Shivam lifting a dumbbell, black and white" loading="lazy" style="object-position:50% 35%"></a>
+    </div>
+  </div>
 </section>
 
 <section class="block" id="shoots" data-only="modelling">
