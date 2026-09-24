@@ -43,7 +43,8 @@ p { text-wrap: pretty }
 .touch { position: fixed; z-index: 60; top: calc(14px + env(safe-area-inset-top, 0px)); right: var(--gut); padding: .55em 1em; background: var(--paper); border: 1px solid var(--line); border-radius: 999px; font-size: .88rem; font-weight: 500; box-shadow: var(--lift); transition: transform 140ms var(--out) }
 .touch:active, .rail-btn:active, .track a:active, .link:active { transform: scale(.97) }
 
-/* Hero: far names, the clip (scrubbed by scroll), near prints, a label. --k zeroes the parallax */
+/* Hero: far names, the clip (scrubbed by scroll), near prints, a label. --k zeroes the parallax.
+   Prints stay in the clip's lower corners and drift outward (a push-in), so they never cross a face. */
 [data-p] { --p: 0; --k: 1 }
 .hero { position: relative; height: 200vh }
 .stage { position: sticky; top: 0; height: 100svh; overflow: clip }
@@ -56,8 +57,8 @@ p { text-wrap: pretty }
 .ph { position: absolute; width: 44%; padding: 6px 6px 0; background: var(--paper); border-radius: 4px; box-shadow: var(--lift); animation: land 1s var(--out) both }
 .ph img { aspect-ratio: 3 / 4; width: 100%; object-fit: cover; border-radius: 2px }
 .ph figcaption { padding: 6px 2px 8px }
-.ph.a { left: -36%; bottom: 5%; rotate: -5deg; transform: translateY(calc(var(--p) * -24vh * var(--k))); translate: calc(var(--mx, 0) * 18px) calc(var(--my, 0) * 18px); animation-delay: .35s }
-.ph.b { right: -18%; top: 7%; rotate: 4deg; transform: translateY(calc(var(--p) * -26vh * var(--k))); translate: calc(var(--mx, 0) * 24px) calc(var(--my, 0) * 24px); animation-delay: .45s }
+.ph.a { left: -36%; bottom: 3%; rotate: -5deg; transform: translate(calc(var(--p) * -6vw * var(--k)), calc(var(--p) * 6vh * var(--k))) scale(calc(1 + var(--p) * .06 * var(--k))); translate: calc(var(--mx, 0) * 18px) calc(var(--my, 0) * 18px); animation-delay: .35s }
+.ph.b { right: -18%; bottom: 14%; rotate: 4deg; transform: translate(calc(var(--p) * 5vw * var(--k)), calc(var(--p) * 4vh * var(--k))) scale(calc(1 + var(--p) * .06 * var(--k))); translate: calc(var(--mx, 0) * 24px) calc(var(--my, 0) * 24px); animation-delay: .45s }
 .label { position: absolute; left: var(--gut); bottom: 14svh; width: min(360px, calc(100vw - 2 * var(--gut))); padding: 16px 18px; background: var(--paper); border: 1px solid var(--line); border-radius: 10px; box-shadow: var(--lift); animation: rise .8s var(--out) .55s both }
 .label p + p { margin-top: .5rem }
 .label .link { margin-top: .9rem }
@@ -131,12 +132,12 @@ section.block { padding: clamp(72px, 9vw, 128px) var(--gut) 0 }
 }
 @media (max-width: 820px) {
   .hero { height: 170vh }
-  .names { top: calc(9svh + env(safe-area-inset-top, 0px)); font-size: 15.5vw }
+  .names { top: calc(9svh + env(safe-area-inset-top, 0px)); font-size: 15.5vw; transform: translateY(calc(var(--p) * -2vh * var(--k))) }
   .set { right: auto; left: 50%; top: 29svh; height: 42svh; transform: translate(-50%, calc(var(--p) * -3vh * var(--k))) scale(calc(1 + var(--p) * .05 * var(--k))) }
   .ph { width: 46% }
   .ph.a { left: -40% }
-  .ph.b { right: -36%; transform: translateY(calc(var(--p) * -14vh * var(--k))) }
-  .ph.a { transform: translateY(calc(var(--p) * -10vh * var(--k))) }
+  .ph.b { right: -36%; transform: translate(calc(var(--p) * 4vw * var(--k)), calc(var(--p) * 3vh * var(--k))) }
+  .ph.a { transform: translate(calc(var(--p) * -4vw * var(--k)), calc(var(--p) * 3vh * var(--k))) }
   .label { bottom: 92px; padding: 12px 14px }
   .label .blurb { display: none }
 }
