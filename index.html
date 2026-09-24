@@ -163,6 +163,13 @@ section.block { padding: clamp(72px, 9vw, 128px) var(--gut) 0 }
 .minis img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; border-radius: 6px }
 .model .ig { display: inline-flex; align-items: center; gap: .5rem; margin-top: 1rem; color: var(--soft) }
 
+/* Modelling: Sahil's Instagram, each tile opens its post */
+.ig-grid { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 6px }
+.ig-grid a { position: relative; display: block; overflow: hidden; border-radius: 6px }
+.ig-grid img { width: 100%; aspect-ratio: 1; object-fit: cover; transition: scale .3s ease }
+.ig-grid a::after { content: ""; position: absolute; top: 8px; right: 8px; width: 18px; height: 18px; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23fff' stroke-width='2'%3E%3Crect x='3' y='3' width='18' height='18' rx='5'/%3E%3Ccircle cx='12' cy='12' r='4'/%3E%3C/svg%3E") center / contain no-repeat; filter: drop-shadow(0 1px 3px #0009) }
+.follow { margin-top: clamp(24px, 3vw, 36px) }
+
 /* Contact fills the screen so "Get in touch" lands squarely on it */
 #contact { display: flex; flex-direction: column; min-height: 100svh }
 .close { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(28px, 5vw, 80px); align-items: start }
@@ -198,7 +205,7 @@ section.block { padding: clamp(72px, 9vw, 128px) var(--gut) 0 }
 
 @media (hover: hover) and (pointer: fine) {
   .modes button:not([aria-pressed=true]):hover, .chip:not([aria-pressed=true]):hover { background: color-mix(in srgb, var(--ink) 8%, var(--paper)) }
-  .clip:hover video, .shot:hover img, .tile:hover img { scale: 1.03 }
+  .clip:hover video, .shot:hover img, .tile:hover img, .ig-grid a:hover img { scale: 1.03 }
   .clip:hover .play::after { scale: 1.06 }
   .plate a:hover, .touch:hover, .model .ig:hover { color: var(--rec) }
 }
@@ -220,6 +227,7 @@ section.block { padding: clamp(72px, 9vw, 128px) var(--gut) 0 }
   .label { bottom: 92px; padding: 12px 14px }
   .label .blurb { display: none }
   .models { grid-template-columns: 1fr }
+  .ig-grid { grid-template-columns: repeat(3, minmax(0, 1fr)) }
 }
 @media (max-width: 560px) {
   .plates, .specs { grid-template-columns: 1fr }
@@ -448,6 +456,19 @@ section.block { padding: clamp(72px, 9vw, 128px) var(--gut) 0 }
   </div>
 </section>
 
+<section class="block" id="insta" data-only="modelling">
+  <div class="head" data-in><h2>On Instagram</h2><p>Recent shoots from Sahil's feed. Tap one to open the post.</p></div>
+  <div class="ig-grid">
+    <a href="https://www.instagram.com/p/DW_71wsjAXI/" target="_blank" rel="noopener" data-in><img src="photos/ig/white.jpg" alt="Sahil in a white shirt, hands in his hair" loading="lazy" style="object-position:50% 30%"></a>
+    <a href="https://www.instagram.com/p/DWMVz8IDHkw/" target="_blank" rel="noopener" data-in style="--i:1"><img src="photos/ig/blue.jpg" alt="Sahil in a blue shirt, standing" loading="lazy" style="object-position:50% 20%"></a>
+    <a href="https://www.instagram.com/p/DOJBckDjKVS/" target="_blank" rel="noopener" data-in style="--i:2"><img src="photos/ig/flowers.jpg" alt="Sahil from behind, beside red flowers" loading="lazy"></a>
+    <a href="https://www.instagram.com/p/DOOESknDBqa/" target="_blank" rel="noopener" data-in style="--i:3"><img src="photos/ig/lake.jpg" alt="Sahil by a lake, looking away" loading="lazy"></a>
+    <a href="https://www.instagram.com/p/DNtO7hFWJmf/" target="_blank" rel="noopener" data-in style="--i:4"><img src="photos/look-6.jpg" alt="Sahil in a racing jacket beside a red car" loading="lazy" style="object-position:50% 25%"></a>
+    <a href="https://www.instagram.com/p/DZMO3RFjNne/" target="_blank" rel="noopener" data-in style="--i:5"><img src="photos/look-1.jpg" alt="Sahil in a pool at night" loading="lazy" style="object-position:50% 30%"></a>
+  </div>
+  <a class="link follow" href="https://www.instagram.com/sahilpathak.21/" target="_blank" rel="noopener" data-in><svg class="icon"><use href="#i-ig"/></svg>Follow @sahilpathak.21</a>
+</section>
+
 <section class="block" id="shoots" data-only="modelling">
   <div class="head" data-in><h2>What we model for</h2></div>
   <ul class="list">
@@ -504,6 +525,7 @@ section.block { padding: clamp(72px, 9vw, 128px) var(--gut) 0 }
     <a href="#looks" data-only="websites" style="--img:url(media/tl-looks.jpg)"><span>This site</span></a>
     <a href="#process" data-only="content"><span>Process</span></a>
     <a href="#models" data-only="modelling" style="--img:url(media/tl-lens.jpg)"><span>Faces</span></a>
+    <a href="#insta" data-only="modelling" style="--img:url(media/tl-ig.jpg)"><span>Insta</span></a>
     <a href="#shoots" data-only="modelling"><span>Shoots</span></a>
     <a href="#contact" style="--img:url(media/tl-us.jpg)"><span>Contact</span></a>
     <i class="head-line" aria-hidden="true"></i>
