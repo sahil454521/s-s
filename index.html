@@ -707,23 +707,6 @@ modeBtns.forEach(b => b.addEventListener('click', () => goMode(b.value)));
 document.querySelectorAll('[data-go]').forEach(b => b.addEventListener('click', () => goMode(b.dataset.go)));
 setMode(root.dataset.mode);
 
-// Instagram counts: the page ships a dated snapshot; /api/ig (a Vercel function, cached for a day)
-// swaps in the live numbers. If it can't answer, the snapshot stays.
-const igEls = [...document.querySelectorAll('[data-ig]')];
-fetch('/api/ig?u=' + [...new Set(igEls.map(e => e.dataset.ig))].join(','))
-  .then(r => r.ok ? r.json() : {})
-  .then(live => {
-    let n = 0;
-    igEls.forEach(el => {
-      const c = live[el.dataset.ig];
-      if (!c) return;
-      n++;
-      el.querySelectorAll('[data-k]').forEach(k => k.textContent = c[k.dataset.k]);
-    });
-    if (n) document.querySelectorAll('.ig-asof').forEach(p => p.textContent = 'Counts live from Instagram, refreshed daily');
-  })
-  .catch(() => {});
-
 // Pointer depth on the hero, desktop only
 if (!reduce && matchMedia('(hover: hover) and (pointer: fine)').matches) hero.addEventListener('pointermove', e => {
   hero.style.setProperty('--mx', (e.clientX / innerWidth - .5).toFixed(3));
