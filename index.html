@@ -121,6 +121,12 @@ section.block { padding: clamp(72px, 9vw, 128px) var(--gut) 0 }
 .list p { margin-top: .45rem; color: var(--soft); font-size: .95rem }
 .list .mono { display: block; margin-bottom: .6rem; color: var(--rec) }
 
+/* Content + Socials: who we've worked with, each opens their Instagram */
+.handles { grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)) }
+.handles a { display: block }
+.handle { display: inline-flex; align-items: center; gap: .45rem; margin-top: .8rem; font: 500 .8rem/1.3 var(--mono); word-break: break-all; transition: color .15s ease }
+.handle .icon { width: 18px; height: 18px }
+
 /* Socials: platforms and the sample week */
 .platforms { display: flex; flex-wrap: wrap; gap: 12px 28px; margin-top: clamp(28px, 3vw, 40px); font-weight: 500 }
 .platforms span { display: inline-flex; align-items: center; gap: .5rem }
@@ -224,7 +230,7 @@ section.block { padding: clamp(72px, 9vw, 128px) var(--gut) 0 }
   .modes button:not([aria-pressed=true]):hover, .chip:not([aria-pressed=true]):hover { background: color-mix(in srgb, var(--ink) 8%, var(--paper)) }
   .clip:hover video, .shot:hover img, .tile:hover img, .ig-grid a:hover img { scale: 1.03 }
   .clip:hover .play::after { scale: 1.06 }
-  .plate a:hover, .touch:hover, .model .ig:hover { color: var(--rec) }
+  .plate a:hover, .touch:hover, .model .ig:hover, .handles a:hover .handle { color: var(--rec) }
 }
 @media (max-width: 1000px) {
   .close, .project { grid-template-columns: 1fr }
@@ -381,6 +387,16 @@ section.block { padding: clamp(72px, 9vw, 128px) var(--gut) 0 }
     <figure class="clip" data-format="story"><div class="frame"><video src="work/reels/r7.mp4" poster="work/reels/r7.jpg" preload="none" playsinline></video><button class="play" aria-label="Play: Founder intro"></button></div><h3>Founder intro</h3><p class="mono">Events &amp; decor · Brand story · 0:30</p></figure>
     <figure class="clip" data-format="skit"><div class="frame"><video src="work/reels/r8.mp4" poster="work/reels/r8.jpg" preload="none" playsinline></video><button class="play" aria-label="Play: Comedy skit"></button></div><h3>Comedy skit</h3><p class="mono">Events &amp; decor · Skit · 0:21</p></figure>
   </div>
+</section>
+
+<section class="block" id="worked" data-only="content socials">
+  <div class="head" data-in><h2>Worked with</h2><p>Brands and creators we make content for. Tap one to open their Instagram.</p></div>
+  <ul class="list handles">
+    <li data-in><a href="https://www.instagram.com/cafebuddy_pimplesaudagar/" target="_blank" rel="noopener"><h3>Cafe Buddy's Espresso</h3><p>Café, Pimple Saudagar</p><span class="handle"><svg class="icon" aria-hidden="true"><use href="#i-ig"/></svg>@cafebuddy_pimplesaudagar</span></a></li>
+    <li data-in style="--i:1"><a href="https://www.instagram.com/dr_skinobsessed/" target="_blank" rel="noopener"><h3>Dr Shubham Chugh</h3><p>Skincare</p><span class="handle"><svg class="icon" aria-hidden="true"><use href="#i-ig"/></svg>@dr_skinobsessed</span></a></li>
+    <li data-in style="--i:2"><a href="https://www.instagram.com/_digvijay_gavhane__/" target="_blank" rel="noopener"><h3>Digvijay Gavhane</h3><p>Creator</p><span class="handle"><svg class="icon" aria-hidden="true"><use href="#i-ig"/></svg>@_digvijay_gavhane__</span></a></li>
+    <li data-in style="--i:3"><a href="https://www.instagram.com/desitotes/" target="_blank" rel="noopener"><h3>Desi Totes</h3><p>Canvas tote brand</p><span class="handle"><svg class="icon" aria-hidden="true"><use href="#i-ig"/></svg>@desitotes</span></a></li>
+  </ul>
 </section>
 
 <!-- ============ Websites (from Sahil's portfolio) ============ -->
@@ -563,6 +579,7 @@ section.block { padding: clamp(72px, 9vw, 128px) var(--gut) 0 }
     <a href="#socials" data-only="socials" title="Calendar, posting, community, growth and reports"><span>What we handle</span></a>
     <a href="#week" data-only="socials" title="What a week of running your socials looks like"><span>Sample week</span></a>
     <a href="#work" data-only="content socials" style="--img:url(media/tl-work.jpg)" title="Reels we planned, shot and edited for brands"><span>Reels</span></a>
+    <a href="#worked" data-only="content socials" title="Brands and creators we make content for"><span>Worked with</span></a>
     <a href="#clients" data-only="websites" style="--img:url(media/tl-sites.jpg)" title="AMG Turnkey Projects and Desi Totes, both live"><span>Client sites</span></a>
     <a href="#labs" data-only="websites" title="Sahil's own live builds"><span>Side projects</span></a>
     <a href="#stack" data-only="websites" title="Interface, server and keeping it running"><span>How we build</span></a>
