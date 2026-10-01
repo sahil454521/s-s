@@ -7,7 +7,7 @@
 <meta name="description" content="Social media handling, content creation, custom websites and modelling.">
 <meta property="og:title" content="Sahil &amp; Shivam | Social media, content, websites, modelling">
 <meta property="og:description" content="A studio of two: socials, content, websites and modelling for brands.">
-<meta property="og:image" content="media/sahil/poster.jpg">
+<meta property="og:image" content="photos/look-1.jpg">
 <meta name="theme-color" content="#E9EBEE">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23E9EBEE'/%3E%3Crect x='14' y='26' width='36' height='12' rx='3' fill='%2314161A'/%3E%3Crect x='30' y='14' width='4' height='36' rx='2' fill='%23E0341F'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -82,16 +82,16 @@ p { text-wrap: pretty }
 /* Hero: far names, a pair of frames (each scrubbed by scroll, drifting apart), a near print, a label.
    --k zeroes the parallax. The print sits below the faces and drifts outward, so it never crosses one. */
 [data-p] { --p: 0; --k: 1 }
-.hero { position: relative; height: 200vh }
-.stage { position: sticky; top: 0; height: 100svh; overflow: clip }
+.hero { position: relative; height: 100svh }
+.stage { position: relative; height: 100svh; overflow: clip }
 .softbox, .names, .pair, .ph { transition: translate .7s var(--out) }
 .softbox { position: absolute; inset: -10%; background: radial-gradient(ellipse 42% 55% at 70% 48%, var(--glow) 0%, color-mix(in srgb, var(--glow) 60%, var(--wall)) 38%, transparent 72%); transform: translateY(calc(var(--p) * 5vh * var(--k))) scale(calc(1 + var(--p) * .1 * var(--k))); translate: calc(var(--mx, 0) * -10px) calc(var(--my, 0) * -10px) }
 .names { position: absolute; left: var(--gut); top: 16svh; font: var(--italic) 700 clamp(3.4rem, 11.5vw, 13.5rem)/.86 var(--display); letter-spacing: -.03em; transform: translateY(calc(var(--p) * -7vh * var(--k))); translate: calc(var(--mx, 0) * -6px) calc(var(--my, 0) * -6px) }
 .names span { display: block; animation: rise .9s var(--out) both; animation-delay: calc(var(--i) * 90ms) }
 .names em { font-style: italic; font-weight: 400 }
 .pair { --cam: 66svh; position: absolute; right: calc(var(--gut) + 3vw); top: 12svh; width: calc(var(--cam) * 9 / 16 * 1.82); height: calc(var(--cam) + 10svh); translate: calc(var(--mx, 0) * 8px) calc(var(--my, 0) * 8px) }
-.cam { position: absolute; width: calc(var(--cam) * 9 / 16); animation: land .9s var(--out) both }
-.cam canvas { display: block; width: 100%; aspect-ratio: 9 / 16; border-radius: 16px; background: var(--poster) center / cover; box-shadow: 0 40px 70px -30px var(--shade), 0 10px 20px -10px var(--shade) }
+.cam { position: absolute; width: calc(var(--cam) * 9 / 16); overflow: hidden; border-radius: 16px; box-shadow: 0 40px 70px -30px var(--shade), 0 10px 20px -10px var(--shade); animation: land .9s var(--out) both }
+.cam canvas { display: block; width: 100%; aspect-ratio: 9 / 16; background: var(--poster) var(--pos, center) / cover; transform: scale(calc(1.02 + var(--p) * .08 * var(--k))) }
 .cam figcaption { position: absolute; left: 10px; top: 10px; padding: .3em .7em; border-radius: 999px; background: var(--paper); color: var(--ink) }
 .cam.s { left: 0; top: 0; transform: translateY(calc(var(--p) * -5vh * var(--k))) scale(calc(1 + var(--p) * .04 * var(--k))); animation-delay: .15s }
 .cam.v { right: 0; top: 10svh; z-index: 1; transform: translateY(calc(var(--p) * 3vh * var(--k))) scale(calc(1 + var(--p) * .04 * var(--k))); animation-delay: .25s }
@@ -243,7 +243,6 @@ section.block { padding: clamp(72px, 9vw, 128px) var(--gut) 0 }
   .head-line { top: 0; bottom: 0 }
   .modes { display: none }
   .mode-pick { display: flex }
-  .hero { height: 170vh }
   .names { top: calc(11svh + env(safe-area-inset-top, 0px)); font-size: 16vw; transform: translateY(calc(var(--p) * -2vh * var(--k))) }
   .pair { --cam: 37svh; right: auto; left: 50%; top: 27svh; margin-left: calc(var(--cam) * 9 / 16 * -.91) }
   .ph { width: 30% }
@@ -297,10 +296,10 @@ section.block { padding: clamp(72px, 9vw, 128px) var(--gut) 0 }
     <div class="softbox" aria-hidden="true"></div>
     <h1 class="names"><span style="--i:0">Sahil <em>&amp;</em></span><span style="--i:1">Shivam</span></h1>
     <div class="pair">
-      <!-- Each frame is a clip painted by scroll. Add a clip with:
+      <!-- Each frame shows its photo. To play a clip on scroll instead, run
            ffmpeg -i clip.mov -an -vf scale=720:1280 -c:v libwebp -quality 72 media/NAME/%03d.webp
-           then set data-count to the number of frames. Shivam's slot shows his photo until then. -->
-      <figure class="cam s"><canvas width="720" height="1280" data-frames="media/sahil" data-count="84" style="--poster:url(media/sahil/poster.jpg)" role="img" aria-label="Sahil on a metro platform"></canvas><figcaption class="mono">Sahil</figcaption></figure>
+           and set data-count to the number of frames. -->
+      <figure class="cam s"><canvas width="720" height="1280" data-frames="media/sahil" data-count="0" style="--poster:url(photos/look-1.jpg)" role="img" aria-label="Sahil in a pool at night"></canvas><figcaption class="mono">Sahil</figcaption></figure>
       <figure class="cam v"><canvas width="720" height="1280" data-frames="media/shivam" data-count="0" style="--poster:url(photos/shivam.jpg)" role="img" aria-label="Shivam"></canvas><figcaption class="mono">Shivam</figcaption></figure>
       <figure class="ph a"><img src="photos/look-6.jpg" alt="Sahil in a racing jacket beside a red car" style="object-position:50% 25%"></figure>
     </div>
@@ -616,7 +615,7 @@ function layout() { clips.forEach((a, i) => a.style.flexGrow = secs[i].offsetHei
 function tick() {
   queued = 0;
   const r = hero.getBoundingClientRect();
-  const p = Math.min(1, Math.max(0, -r.top / (r.height - innerHeight)));
+  const p = Math.min(1, Math.max(0, -r.top / r.height)); // no pin: the hero moves as it scrolls away
   hero.style.setProperty('--p', p.toFixed(4));
   paint(p);
 
