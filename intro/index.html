@@ -1,0 +1,313 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Sahil &amp; Shivam | Intro</title>
+<!-- A 1080x1920 motion graphic. render(t) draws the frame at t seconds; render.mjs captures every frame
+     and ffmpeg encodes them. Open this page alone to scrub it: add ?t=4.2 to the URL. -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400;1,700&family=Geist:wght@500;600&family=Geist+Mono:wght@500&display=block" rel="stylesheet">
+<style>
+:root { --display: "Playfair Display", Georgia, serif; --text: "Geist", Arial, sans-serif; --mono: "Geist Mono", monospace }
+* { box-sizing: border-box; margin: 0; padding: 0 }
+html, body { width: 1080px; height: 1920px; overflow: hidden; background: #000 }
+img { display: block; width: 100%; height: 100%; object-fit: cover }
+.scene { position: absolute; inset: 0; overflow: hidden; visibility: hidden }
+.a { position: absolute }
+.mono { font: 500 30px/1.3 var(--mono); letter-spacing: .08em; text-transform: uppercase }
+.line { display: block; overflow: hidden; padding-bottom: .1em; margin-bottom: -.1em }
+.ch { display: inline-block; white-space: pre }
+.big { font: 700 128px/1 var(--display); letter-spacing: -.02em }
+.big em { font-style: italic; font-weight: 400 }
+.grain { position: absolute; inset: 0; z-index: 99; pointer-events: none; opacity: .06; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E") }
+.ig { width: 1em; height: 1em; fill: none; stroke: currentColor; stroke-width: 1.8 }
+
+/* the edit timeline from the website, used to open and close */
+.mini { height: 130px; display: flex; gap: 8px; padding: 8px; background: #fff; border: 2px solid #D2D6DC; border-radius: 22px; box-shadow: 0 30px 60px -30px #1f2a3a66 }
+.mini .clip { position: relative; flex: 1; overflow: hidden; border-radius: 12px; background: #D2D6DC }
+.mini .clip img { position: absolute; inset: 0 }
+.mini .clip span { position: absolute; left: 10px; top: 10px; padding: 4px 10px; border-radius: 8px; background: #fffffff0; color: #14161A; font: 500 20px/1.2 var(--mono); letter-spacing: .06em; text-transform: uppercase }
+.head { position: absolute; top: -18px; bottom: -18px; left: 0; width: 6px; margin-left: -3px; background: #E0341F; border-radius: 3px }
+.head::before { content: ""; position: absolute; top: -6px; left: -9px; width: 24px; height: 20px; background: #E0341F; clip-path: polygon(0 0, 100% 0, 50% 100%) }
+
+/* people */
+.frame { overflow: hidden; border-radius: 28px }
+.print { padding: 10px 10px 0; background: #F2EEE8; border-radius: 6px; box-shadow: 0 30px 60px -20px #000c }
+.print img { aspect-ratio: 9 / 16; height: auto; border-radius: 3px }
+.print span { display: block; padding: 10px 4px 14px; color: #14161A; font: 500 20px var(--mono); letter-spacing: .06em; text-transform: uppercase }
+.roles { list-style: none; font: 500 50px/1.25 var(--text) }
+.roles li { display: flex; align-items: center; gap: 22px }
+.roles li::before { content: ""; width: 34px; height: 4px; border-radius: 2px; background: var(--acc) }
+.handle { display: flex; align-items: center; gap: 16px; font: 500 40px var(--text) }
+
+/* chapters */
+.strip { display: flex; gap: 20px }
+.strip img { flex: none; width: 292px; height: 520px; border-radius: 22px; box-shadow: 0 24px 40px -24px #1f2a3a80 }
+.rec { display: flex; align-items: center; gap: 14px; color: #E0341F }
+.rec i { width: 22px; height: 22px; border-radius: 50%; background: #E0341F }
+.week { list-style: none; width: 920px }
+.week li { display: flex; align-items: center; gap: 30px; height: 126px; border-top: 3px solid #16181D }
+.week .mono { width: 110px; color: #2B59C3 }
+.week b { flex: 1; font: 600 52px var(--text) }
+.week .tick { width: 64px; height: 64px; border-radius: 50%; border: 3px solid #2B59C3; display: grid; place-items: center }
+.week .tick svg { width: 34px; fill: none; stroke: #fff; stroke-width: 4; stroke-linecap: round; stroke-linejoin: round }
+.plats { display: flex; gap: 44px; font: 600 40px var(--text); color: #16181D }
+.plats span { display: flex; align-items: center; gap: 14px }
+.browser { width: 920px; height: 720px; overflow: hidden; background: #FBFDFC; border: 2px solid #CFDAD4; border-radius: 28px; box-shadow: 0 40px 80px -40px #10251a99 }
+.bar { display: flex; align-items: center; gap: 12px; height: 76px; padding: 0 22px; border-bottom: 2px solid #CFDAD4 }
+.bar i { width: 18px; height: 18px; border-radius: 50%; background: #CFDAD4 }
+.url { margin-left: 14px; padding: 8px 20px; border-radius: 999px; background: #E7EEEA; font: 500 26px var(--mono); color: #0F1A15 }
+.view { position: relative; height: 644px }
+.view img { position: absolute; inset: 0; object-position: top }
+.col { display: flex; flex-direction: column; gap: 20px; width: 293px }
+.col img { height: 366px; border-radius: 16px }
+</style>
+</head>
+<body>
+
+<!-- 1. Open -->
+<section class="scene" id="s1" style="background:#E9EBEE;color:#14161A">
+  <p class="mono a" id="s1-eye" style="left:80px;top:150px">Studio of two</p>
+  <h1 class="a" style="left:80px;top:560px;font:700 250px/.95 var(--display);letter-spacing:-.03em">
+    <span class="line"><span class="split">Sahil </span><em class="split" style="font-weight:400">&amp;</em></span>
+    <span class="line"><span class="split">Shivam</span></span>
+  </h1>
+  <div class="a mini" id="s1-mini" style="left:80px;right:80px;top:1400px">
+    <div class="clip"><img src="../work/reels/r2.jpg" alt=""><span>Content</span></div>
+    <div class="clip"><img src="../photos/ig/sv-sunset.jpg" alt=""><span>Socials</span></div>
+    <div class="clip"><img src="../work/sites/desi.jpg" alt=""><span>Websites</span></div>
+    <div class="clip"><img src="../photos/look-1.jpg" alt=""><span>Modelling</span></div>
+    <i class="head" id="s1-head"></i>
+  </div>
+  <p class="mono a" id="s1-tag" style="left:80px;top:1590px">Content · Socials · Websites · Modelling</p>
+</section>
+
+<!-- 2. Sahil -->
+<section class="scene" id="s2" style="background:#121315;color:#F2EEE8;--acc:#4FB0C6">
+  <div class="a frame" id="s2-photo" style="left:80px;top:130px;width:920px;height:1060px"><img src="../photos/sahil.jpg" alt="" style="object-position:50% 30%"></div>
+  <figure class="a print" id="s2-print" style="right:50px;top:620px;width:290px;rotate:5deg"><img src="../photos/look-1.jpg" alt=""><span>Sahil · Night pool</span></figure>
+  <p class="mono a" id="s2-eye" style="left:80px;top:1250px;color:#4FB0C6">Meet</p>
+  <h2 class="a" style="left:80px;top:1300px;font:700 132px/1 var(--display);letter-spacing:-.02em"><span class="line"><span class="split">Sahil Pathak</span></span></h2>
+  <ul class="a roles" style="left:80px;top:1470px"><li>Full-stack developer</li><li>Content creator</li><li>Model</li></ul>
+  <p class="mono a" id="s2-uni" style="left:80px;top:1690px;color:#A8A39B">IIT Guwahati · Data Science &amp; AI</p>
+  <p class="a handle" id="s2-ig" style="left:80px;top:1770px"><svg class="ig" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r=".6" fill="currentColor"/></svg>@sahilpathak.21</p>
+</section>
+
+<!-- 3. Shivam -->
+<section class="scene" id="s3" style="background:#170F0B;color:#F2EEE8;--acc:#E8652C">
+  <div class="a frame" id="s3-photo" style="left:80px;top:130px;width:920px;height:1060px"><img src="../photos/shivam.jpg" alt="" style="object-position:50% 25%"></div>
+  <figure class="a print" id="s3-print" style="left:50px;top:620px;width:290px;rotate:-5deg"><img src="../photos/ig/sv-suit.jpg" alt=""><span>Shivam · Editorial</span></figure>
+  <p class="mono a" id="s3-eye" style="left:80px;top:1250px;color:#E8652C">Meet</p>
+  <h2 class="a" style="left:80px;top:1300px;font:700 132px/1 var(--display);letter-spacing:-.02em"><span class="line"><span class="split">Shivam Sable</span></span></h2>
+  <ul class="a roles" style="left:80px;top:1470px"><li>Content creator</li><li>Model</li><li>On camera for brands</li></ul>
+  <p class="mono a" id="s3-uni" style="left:80px;top:1690px;color:#A8A39B">Fitness · Fashion · Lifestyle</p>
+  <p class="a handle" id="s3-ig" style="left:80px;top:1770px"><svg class="ig" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r=".6" fill="currentColor"/></svg>@shivam.forsure</p>
+</section>
+
+<!-- 4. Content creation -->
+<section class="scene" id="s4" style="background:#E9EBEE;color:#14161A">
+  <p class="mono a" id="s4-eye" style="left:80px;top:140px">Content creation</p>
+  <p class="mono a rec" id="s4-rec" style="right:80px;top:140px"><i></i><span id="s4-tc">REC 00:00:00</span></p>
+  <h2 class="a big" style="left:80px;top:230px"><span class="line"><span class="split">We make reels</span></span><span class="line"><em class="split">for brands.</em></span></h2>
+  <div class="a strip" id="s4-r1" style="left:80px;top:600px"><img src="../work/reels/r1.jpg" alt=""><img src="../work/reels/r2.jpg" alt=""><img src="../work/reels/r3.jpg" alt=""><img src="../work/reels/r4.jpg" alt=""><img src="../work/reels/r5.jpg" alt=""><img src="../work/reels/r6.jpg" alt=""></div>
+  <div class="a strip" id="s4-r2" style="left:80px;top:1150px"><img src="../work/reels/r6.jpg" alt=""><img src="../work/reels/r7.jpg" alt=""><img src="../work/reels/r8.jpg" alt=""><img src="../work/reels/r1.jpg" alt=""><img src="../work/reels/r3.jpg" alt=""><img src="../work/reels/r5.jpg" alt=""></div>
+  <p class="mono a" id="s4-tag" style="left:80px;top:1730px">Dental · Haircare · Lifestyle · Events</p>
+</section>
+
+<!-- 5. Social media -->
+<section class="scene" id="s5" style="background:#F1F1EE;color:#16181D">
+  <p class="mono a" id="s5-eye" style="left:80px;top:140px;color:#2B59C3">Social media</p>
+  <h2 class="a big" style="left:80px;top:230px"><span class="line"><span class="split">We run</span></span><span class="line"><em class="split">your socials.</em></span></h2>
+  <ul class="a week" id="s5-week" style="left:80px;top:610px">
+    <li><span class="mono">Mon</span><b>Plan</b><span class="tick"><svg viewBox="0 0 24 24"><path d="m5 12 4.5 4.5L19 7"/></svg></span></li>
+    <li><span class="mono">Tue</span><b>Shoot</b><span class="tick"><svg viewBox="0 0 24 24"><path d="m5 12 4.5 4.5L19 7"/></svg></span></li>
+    <li><span class="mono">Wed</span><b>Reel goes live</b><span class="tick"><svg viewBox="0 0 24 24"><path d="m5 12 4.5 4.5L19 7"/></svg></span></li>
+    <li><span class="mono">Thu</span><b>Stories</b><span class="tick"><svg viewBox="0 0 24 24"><path d="m5 12 4.5 4.5L19 7"/></svg></span></li>
+    <li><span class="mono">Fri</span><b>Post</b><span class="tick"><svg viewBox="0 0 24 24"><path d="m5 12 4.5 4.5L19 7"/></svg></span></li>
+    <li><span class="mono">Sat</span><b>Community</b><span class="tick"><svg viewBox="0 0 24 24"><path d="m5 12 4.5 4.5L19 7"/></svg></span></li>
+    <li><span class="mono">Sun</span><b>Review</b><span class="tick"><svg viewBox="0 0 24 24"><path d="m5 12 4.5 4.5L19 7"/></svg></span></li>
+  </ul>
+  <p class="a plats" id="s5-plats" style="left:80px;top:1610px">
+    <span><svg class="ig" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r=".6" fill="currentColor"/></svg>Instagram</span>
+    <span><svg class="ig" viewBox="0 0 24 24"><rect x="2.5" y="5.5" width="19" height="13" rx="4"/><path d="M10 9.5v5l4.5-2.5z" fill="currentColor"/></svg>YouTube</span>
+    <span><svg class="ig" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M8 10.5V17M8 7.5v.01M12 17v-6.5M12 13.5c0-2 1-3 2.5-3S17 11.5 17 13.5V17"/></svg>LinkedIn</span>
+  </p>
+</section>
+
+<!-- 6. Websites -->
+<section class="scene" id="s6" style="background:#E7EEEA;color:#0F1A15">
+  <p class="mono a" id="s6-eye" style="left:80px;top:140px;color:#16804F">Websites</p>
+  <h2 class="a big" style="left:80px;top:230px"><span class="line"><span class="split">We build</span></span><span class="line"><em class="split">websites.</em></span></h2>
+  <div class="a browser" id="s6-win" style="left:80px;top:600px">
+    <div class="bar"><i></i><i></i><i></i><span class="url" id="s6-url">&nbsp;</span></div>
+    <div class="view"><img src="../work/sites/amg.jpg" alt=""><img id="s6-desi" src="../work/sites/desi.jpg" alt=""></div>
+  </div>
+  <p class="mono a" id="s6-l1" style="left:80px;top:1390px;color:#16804F">● Live client sites</p>
+  <p class="a" id="s6-l2" style="left:80px;top:1450px;font:600 52px/1.2 var(--text)">AMG Turnkey Projects<br>Desi Totes</p>
+  <p class="mono a" id="s6-l3" style="left:80px;top:1630px;color:#4F5E57">React · Node · MongoDB · Razorpay</p>
+</section>
+
+<!-- 7. Modelling -->
+<section class="scene" id="s7" style="background:#100F0E;color:#EFE9E0">
+  <p class="mono a" id="s7-eye" style="left:80px;top:140px;color:#C9A36A">Modelling</p>
+  <h2 class="a big" style="left:80px;top:230px;font-style:italic"><span class="line"><span class="split">In front</span></span><span class="line"><span class="split">of the lens.</span></span></h2>
+  <div class="a" id="s7-mosaic" style="left:80px;top:600px;right:0;bottom:0;display:flex;gap:20px;overflow:hidden">
+    <div class="col" id="s7-c1"><img src="../photos/look-1.jpg" alt="" style="object-position:50% 30%"><img src="../photos/sahil.jpg" alt=""><img src="../photos/look-3.jpg" alt=""><img src="../photos/ig/white.jpg" alt=""></div>
+    <div class="col" id="s7-c2"><img src="../photos/look-2.jpg" alt="" style="object-position:35% 50%"><img src="../photos/shivam.jpg" alt=""><img src="../photos/look-4.jpg" alt=""><img src="../photos/ig/sv-hands.jpg" alt=""></div>
+    <div class="col" id="s7-c3"><img src="../photos/look-6.jpg" alt="" style="object-position:50% 25%"><img src="../photos/look-7.jpg" alt=""><img src="../photos/look-5.jpg" alt=""><img src="../photos/look-8.jpg" alt="" style="object-position:50% 62%"></div>
+  </div>
+</section>
+
+<!-- 8. Outro -->
+<section class="scene" id="s8" style="background:#E9EBEE;color:#14161A">
+  <h2 class="a" style="left:80px;top:420px;font:700 220px/.95 var(--display);letter-spacing:-.03em">
+    <span class="line"><span class="split">Sahil </span><em class="split" style="font-weight:400">&amp;</em></span>
+    <span class="line"><span class="split">Shivam</span></span>
+  </h2>
+  <p class="mono a" id="s8-tag" style="left:80px;top:910px">Content · Socials · Websites · Modelling</p>
+  <p class="a" id="s8-cta" style="left:80px;top:1010px;font:600 70px/1.15 var(--text)">Let's make something<br>together.</p>
+  <p class="a handle" id="s8-ig1" style="left:80px;top:1240px"><svg class="ig" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r=".6" fill="currentColor"/></svg>@sahilpathak.21</p>
+  <p class="a handle" id="s8-ig2" style="left:80px;top:1310px"><svg class="ig" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r=".6" fill="currentColor"/></svg>@shivam.forsure</p>
+  <div class="a mini" id="s8-mini" style="left:80px;right:80px;top:1560px">
+    <div class="clip"><img src="../work/reels/r2.jpg" alt=""><span>Content</span></div>
+    <div class="clip"><img src="../photos/ig/sv-sunset.jpg" alt=""><span>Socials</span></div>
+    <div class="clip"><img src="../work/sites/desi.jpg" alt=""><span>Websites</span></div>
+    <div class="clip"><img src="../photos/look-1.jpg" alt=""><span>Modelling</span></div>
+    <i class="head" id="s8-head"></i>
+  </div>
+</section>
+
+<div class="grain"></div>
+
+<script>
+// ---- timing helpers: everything is a pure function of t, so any frame can be drawn on its own
+const clamp = x => Math.max(0, Math.min(1, x));
+const prog = (t, a, d) => clamp((t - a) / d);
+const out = x => 1 - (1 - x) ** 4;                                   // strong ease-out (entrances)
+const inOut = x => x < .5 ? 8 * x ** 4 : 1 - (-2 * x + 2) ** 4 / 2;   // strong ease-in-out (wipes, moves)
+const $ = id => document.getElementById(id);
+
+// split headings into letters that rise out of their line
+document.querySelectorAll('.split').forEach(el => {
+  el.innerHTML = [...el.textContent].map(c => `<span class="ch">${c}</span>`).join('');
+});
+const letters = scene => [...$(scene).querySelectorAll('.ch')];
+
+function rise(els, lt, start, stagger = .03, dur = .7) {
+  els.forEach((el, i) => { el.style.transform = `translateY(${(1 - out(prog(lt, start + i * stagger, dur))) * 110}%)`; });
+}
+function fadeUp(el, lt, start, dist = 40, dur = .6) {
+  const p = out(prog(lt, start, dur));
+  el.style.opacity = p; el.style.transform = `translateY(${(1 - p) * dist}px)`;
+}
+function slideIn(el, lt, start, dist = 60, dur = .6) {
+  const p = out(prog(lt, start, dur));
+  el.style.opacity = p; el.style.transform = `translateX(${(1 - p) * -dist}px)`;
+}
+function type(el, text, lt, start, dur) {
+  el.textContent = text.slice(0, Math.round(prog(lt, start, dur) * text.length)) || ' ';
+}
+function timeline(mini, head, lt, start, dur) {
+  const p = inOut(prog(lt, start, dur));
+  head.style.left = `${8 + p * (mini.clientWidth - 16)}px`;
+  [...mini.querySelectorAll('.clip')].forEach((c, i, all) => {
+    c.style.clipPath = `inset(0 ${(1 - clamp(p * all.length - i)) * 100}% 0 0)`;
+  });
+}
+
+// ---- scenes: [start, end] in seconds; each wipes up over the one before it
+const WIPE = .45;
+const scenes = [
+  { id: 's1', start: 0, end: 2.5, draw(lt) {
+      fadeUp($('s1-eye'), lt, .1);
+      rise(letters('s1'), lt, .2, .035);
+      fadeUp($('s1-mini'), lt, .45, 50);
+      timeline($('s1-mini'), $('s1-head'), lt, .6, 1.6);
+      fadeUp($('s1-tag'), lt, 1.4);
+  } },
+  { id: 's2', start: 2.5, end: 5.5, draw(lt) { person('s2', lt, 1); } },
+  { id: 's3', start: 5.5, end: 8.5, draw(lt) { person('s3', lt, -1); } },
+  { id: 's4', start: 8.5, end: 11, draw(lt) {
+      fadeUp($('s4-eye'), lt, .2); fadeUp($('s4-rec'), lt, .2);
+      $('s4-rec').querySelector('i').style.opacity = Math.floor(lt * 2) % 2 ? .25 : 1;
+      const f = Math.floor(lt * 30); $('s4-tc').textContent = `REC 00:${String(Math.floor(f / 30)).padStart(2, '0')}:${String(f % 30).padStart(2, '0')}`;
+      rise(letters('s4'), lt, .3, .025);
+      const a = out(prog(lt, .4, .7)), b = out(prog(lt, .55, .7));
+      $('s4-r1').style.transform = `translateX(${-lt * 170 + (1 - a) * 300}px)`; $('s4-r1').style.opacity = a;
+      $('s4-r2').style.transform = `translateX(${-620 + lt * 170 - (1 - b) * 300}px)`; $('s4-r2').style.opacity = b;
+      fadeUp($('s4-tag'), lt, 1);
+  } },
+  { id: 's5', start: 11, end: 13, draw(lt) {
+      fadeUp($('s5-eye'), lt, .2);
+      rise(letters('s5'), lt, .3, .025);
+      [...$('s5-week').children].forEach((li, i) => {
+        slideIn(li, lt, .5 + i * .07, 50, .5);
+        const k = out(prog(lt, .95 + i * .09, .25)), tick = li.querySelector('.tick');
+        tick.style.background = k > .5 ? '#2B59C3' : 'transparent';
+        tick.querySelector('svg').style.opacity = k; tick.style.transform = `scale(${.85 + .15 * k})`;
+      });
+      fadeUp($('s5-plats'), lt, 1.45);
+  } },
+  { id: 's6', start: 13, end: 15, draw(lt) {
+      fadeUp($('s6-eye'), lt, .2);
+      rise(letters('s6'), lt, .3, .03);
+      fadeUp($('s6-win'), lt, .45, 60);
+      const desi = inOut(prog(lt, 1.15, .5));
+      $('s6-desi').style.transform = `translateX(${(1 - desi) * 100}%)`;
+      if (lt < 1.15) type($('s6-url'), 'amgprojectsllp.com', lt, .65, .45);
+      else type($('s6-url'), 'desitotes.com', lt, 1.3, .3);
+      fadeUp($('s6-l1'), lt, .8); fadeUp($('s6-l2'), lt, .9); fadeUp($('s6-l3'), lt, 1);
+  } },
+  { id: 's7', start: 15, end: 17, draw(lt) {
+      fadeUp($('s7-eye'), lt, .2);
+      rise(letters('s7'), lt, .3, .03);
+      const a = out(prog(lt, .35, .8));
+      $('s7-mosaic').style.opacity = a;
+      $('s7-c1').style.transform = `translateY(${(1 - a) * 160 - lt * 110}px)`;
+      $('s7-c2').style.transform = `translateY(${-300 + (1 - a) * 260 + lt * 110}px)`;
+      $('s7-c3').style.transform = `translateY(${-90 + (1 - a) * 200 - lt * 80}px)`;
+  } },
+  { id: 's8', start: 17, end: 19.5, draw(lt) {
+      rise(letters('s8'), lt, .25, .035);
+      fadeUp($('s8-tag'), lt, .75); fadeUp($('s8-cta'), lt, .9);
+      fadeUp($('s8-ig1'), lt, 1.05); fadeUp($('s8-ig2'), lt, 1.15);
+      fadeUp($('s8-mini'), lt, .5, 50);
+      timeline($('s8-mini'), $('s8-head'), lt, .5, 1.3);
+  } },
+];
+const DURATION = 19.5;
+
+// Sahil (dir 1) and Shivam (dir -1) share one layout, mirrored where the print sits
+function person(id, lt, dir) {
+  const photo = $(`${id}-photo`), p = out(prog(lt, .15, .8));
+  photo.style.clipPath = `inset(0 0 ${(1 - p) * 100}% 0)`;
+  photo.querySelector('img').style.transform = `scale(${1.14 - .1 * out(prog(lt, 0, 3))})`;
+  const q = out(prog(lt, .8, .7));
+  $(`${id}-print`).style.transform = `translateX(${(1 - q) * 130 * dir}%)`;
+  fadeUp($(`${id}-eye`), lt, .6);
+  rise(letters(id), lt, .7, .03);
+  [...$(id).querySelectorAll('.roles li')].forEach((li, i) => slideIn(li, lt, 1.15 + i * .1));
+  fadeUp($(`${id}-uni`), lt, 1.6); fadeUp($(`${id}-ig`), lt, 1.75);
+}
+
+function render(t) {
+  scenes.forEach((s, i) => {
+    const el = $(s.id), next = scenes[i + 1];
+    const visible = t >= s.start && t < (next ? next.start + WIPE : Infinity);
+    el.style.visibility = visible ? 'visible' : 'hidden';
+    if (!visible) return;
+    el.style.zIndex = i;
+    // wipe in from the bottom, and drift up a touch while the next scene wipes over
+    el.style.clipPath = i ? `inset(${(1 - inOut(prog(t, s.start, WIPE))) * 100}% 0 0 0)` : 'none';
+    el.style.transform = next ? `translateY(${-80 * inOut(prog(t, next.start, WIPE))}px)` : 'none';
+    s.draw(t - s.start);
+  });
+}
+
+window.DURATION = DURATION;
+window.ready = Promise.all([document.fonts.ready, ...[...document.images].map(img => img.decode().catch(() => {}))])
+  .then(() => render(+new URLSearchParams(location.search).get('t') || 0));
+</script>
+</body>
+</html>
